@@ -1,0 +1,10 @@
+B:\Arafat_Bitm\Customers\customer\bin\Debug\customer.exe.config
+B:\Arafat_Bitm\Customers\customer\bin\Debug\customer.exe
+B:\Arafat_Bitm\Customers\customer\bin\Debug\customer.pdb
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.csprojAssemblyReference.cache
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.Properties.Resources.resources
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.csproj.GenerateResource.cache
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.csproj.CoreCompileInputs.cache
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.exe
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.pdb
+B:\Arafat_Bitm\Customers\customer\obj\Debug\customer.customersUi.resources
