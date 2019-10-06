@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +15,10 @@ namespace customer
 {
     public partial class customersUi : Form
     {
+        string id;
+
         CustomerManager _customerManager = new CustomerManager();
-        
+
         public customersUi()
         {
             InitializeComponent();
@@ -50,6 +52,12 @@ namespace customer
                 return;
             }
 
+            if (codeTextBox.TextLength == 4)
+            {
+                MessageBox.Show("Code must be 4 digit!!!");
+                return;
+            }
+
             if (String.IsNullOrEmpty(nameTextBox.Text))
             {
                 MessageBox.Show("Name Can not be Empty!!!");
@@ -65,6 +73,12 @@ namespace customer
             if (String.IsNullOrEmpty(contactTextBox.Text))
             {
                 MessageBox.Show("Contact Can not be Empty!!!");
+                return;
+            }
+
+            if (contactTextBox.TextLength == 11)
+            {
+                MessageBox.Show("Contact must be 11 digit!!!");
                 return;
             }
 
@@ -88,6 +102,17 @@ namespace customer
             }
 
 
+
+            //Check UNIQUE
+
+            if (_customerManager.IsContactExists(customerA))
+            {
+                MessageBox.Show(contactTextBox.Text + " Already Exists!");
+                return;
+            }
+
+            //add check
+
             bool isAdded = _customerManager.Save(customerA);
 
             if (isAdded)
@@ -101,15 +126,30 @@ namespace customer
             }
 
 
-
-
         }
 
 
 
         private void customers_Load(object sender, EventArgs e)
         {
-
+            districtComboBox.DataSource = _customerManager.DistrictComboBox();
         }
+
+        private void showDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.showDataGridView.Rows[e.RowIndex];
+                id = row.Cells[0].Value.ToString();
+                codeTextBox.Text = row.Cells[1].Value.ToString();
+                nameTextBox.Text = row.Cells[2].Value.ToString();
+                addressTextBox.Text = row.Cells[3].Value.ToString();
+                contactTextBox.Text = row.Cells[4].Value.ToString();
+                districtComboBox.Text = row.Cells[5].Value.ToString();
+
+            }
+        }
+
+       
     }
 }
