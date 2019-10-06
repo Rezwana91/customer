@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using customer.Repository;
 using customer.Model;
@@ -30,6 +31,17 @@ namespace customer.Manager
 
             return _CustomerRepository.IsCodeExists(customerA);
 
+        }
+
+        public bool IsContactExists(Customer customerA)
+        {
+            return _CustomerRepository.IsContactExists(customerA);
+
+        }
+
+        public List<Customer> DistrictComboBox()
+        {
+            return _CustomerRepository.DistrictComboBox();
         }
     }
 }
