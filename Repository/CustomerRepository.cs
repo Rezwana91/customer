@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using  System.Data;
+using System.Data;
 using System.Data.SqlClient;
 using customer.Model;
 
@@ -23,38 +23,37 @@ namespace customer.Repository
             //Command 
             //INSERT INTO Items (Name, Price) Values ('Black', 120)
 
-            string commandString = @"SELECT * FROM Customer WHERE Code = '"+customerA.Code+ "'";
+            string commandString = @"SELECT * FROM Customer WHERE Code = '" + customerA.Code + "'";
             SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
             //Open
             sqlConnection.Open();
 
-           
+
 
             //With DataReader
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            List<Customer> customers = new List<Customer>();
+            List<Customer> customerss = new List<Customer>();
 
             while (sqlDataReader.Read())
             {
-                Customer customerB = new Customer();
-                customerB.Code = sqlDataReader["code"].ToString();
-                customerB.Name = sqlDataReader["Name"].ToString();
-                customerB.Address = sqlDataReader["Address"].ToString();
-                customerB.Contact = sqlDataReader["Contact"].ToString();
+                //customerA.Code = sqlDataReader["Code"].ToString();
+                customerA.Name = sqlDataReader["Name"].ToString();
+                customerA.Address = sqlDataReader["Address"].ToString();
+                customerA.Contact = sqlDataReader["Contact"].ToString();
 
-                customers.Add(customerB);
-                
+                customerss.Add(customerA);
+
             }
 
-           
+
             //Close
             sqlConnection.Close();
 
             //return dataTable;
-            return customers;
-            
+            return customerss;
+
         }
 
         public bool Save(Customer customerA)
@@ -99,7 +98,7 @@ namespace customer.Repository
 
             //Command 
             //INSERT INTO Items (Name, Price) Values ('Black', 120)
-            string commandString = @"SELECT * FROM Items WHERE Name='" + customerA.Code + "'";
+            string commandString = @"SELECT * FROM Customer WHERE Code='" + customerA.Code + "'";
             SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
             //Open
@@ -120,6 +119,79 @@ namespace customer.Repository
             return exists;
         }
 
+        public bool IsContactExists(Customer customerA)
+        {
+            bool exists = false;
 
+            //Connection
+            string connectionString =
+                @"Server=DESKTOP-55FHBO2; Database=CustomerA; Integrated Security=True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            //Command 
+            //INSERT INTO Items (Name, Price) Values ('Black', 120)
+            string commandString = @"SELECT * FROM Customer WHERE Contact='" + customerA.Contact + "'";
+            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            //Open
+            sqlConnection.Open();
+            //Show
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable dataTable = new DataTable();
+            sqlDataAdapter.Fill(dataTable);
+
+
+            if (dataTable.Rows.Count > 0)
+            {
+                exists = true;
+            }
+
+            //Close
+            sqlConnection.Close();
+            return exists;
+        }
+
+        public List<Customer> DistrictComboBox()
+        {
+            //Connection
+            string connectionString = @"Server=DESKTOP-55FHBO2; Database=CustomerA; Integrated Security=True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            //Command 
+            //INSERT INTO Items (Name, Price) Values ('Black', 120)
+
+            string commandString = @"SELECT Id,Name FROM District";
+            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            //Open
+            sqlConnection.Open();
+
+
+
+            //With DataReader
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            List<Customer> customerss = new List<Customer>();
+
+            while (sqlDataReader.Read())
+            {
+                Customer customerA = new Customer();
+                customerA.Code = sqlDataReader["code"].ToString();
+                customerA.Name = sqlDataReader["Name"].ToString();
+                customerA.Address = sqlDataReader["Address"].ToString();
+                customerA.Contact = sqlDataReader["Contact"].ToString();
+
+                customerss.Add(customerA);
+
+            }
+
+
+            //Close
+            sqlConnection.Close();
+
+            //return dataTable;
+            return customerss;
+
+        }
     }
 }
