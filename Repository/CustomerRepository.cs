@@ -151,7 +151,7 @@ namespace customer.Repository
             return exists;
         }
 
-        public List<Customer> DistrictComboBox()
+       public List<DistrictModel> DistrictComboBox()
         {
             //Connection
             string connectionString = @"Server=DESKTOP-55FHBO2; Database=CustomerA; Integrated Security=True";
@@ -171,17 +171,16 @@ namespace customer.Repository
             //With DataReader
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            List<Customer> customerss = new List<Customer>();
+            List<DistrictModel> customerss = new List<DistrictModel>();
 
             while (sqlDataReader.Read())
             {
-                Customer customerA = new Customer();
-                customerA.Code = sqlDataReader["code"].ToString();
-                customerA.Name = sqlDataReader["Name"].ToString();
-                customerA.Address = sqlDataReader["Address"].ToString();
-                customerA.Contact = sqlDataReader["Contact"].ToString();
+                DistrictModel districtModelA = new DistrictModel();
+                districtModelA.Id = sqlDataReader["Id"].ToString();
+                districtModelA.Name = sqlDataReader["Name"].ToString();
+               
 
-                customerss.Add(customerA);
+                customerss.Add(districtModelA);
 
             }
 
