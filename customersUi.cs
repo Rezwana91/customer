@@ -146,6 +146,7 @@ namespace customer
                 addressTextBox.Text = row.Cells[3].Value.ToString();
                 contactTextBox.Text = row.Cells[4].Value.ToString();
                 districtComboBox.Text = row.Cells[5].Value.ToString();
+                saveButton.Text = " Update ";
 
             }
         }
